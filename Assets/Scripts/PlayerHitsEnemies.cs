@@ -7,7 +7,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class PlayerHitsEnemies : MonoBehaviour
 {
-    [SerializeField] private float touchRadiusBonus = 0.25f;
+    [SerializeField] private float touchRadiusBonus = 0.5f;
     [SerializeField] private float ignoreContactsForSecondsOnStart = 0.15f;
 
     private NavMeshAgent agent;

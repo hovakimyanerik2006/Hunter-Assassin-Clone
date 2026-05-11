@@ -112,4 +112,8 @@ public class CameraFollow : MonoBehaviour
         position.z = Mathf.Clamp(position.z, paddedMinZ, paddedMaxZ);
         return position;
     }
+
+
+
+    
 }
