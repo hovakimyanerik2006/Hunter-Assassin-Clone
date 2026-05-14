@@ -34,14 +34,19 @@ public class PlayerMovement : MonoBehaviour
         {
             TryMoveToMouseClick(Mouse.current.position.ReadValue());
         }
+
+        Vector3 moveDirection = agent.velocity.sqrMagnitude > 0.1f ? agent.velocity : agent.desiredVelocity;
+        if (moveDirection.sqrMagnitude > 0.1f)
+        {
+            moveDirection.y = 0f;
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection.normalized);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 15f);
+        }
     }
 
     private void LateUpdate()
     {
-        if (keepFixedRotation)
-        {
-            transform.rotation = initialRotation;
-        }
+        // Disabled to allow rotation
     }
 
     private void TryMoveToMouseClick(Vector2 mouseScreenPosition)
@@ -104,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
         agent.speed = Mathf.Max(0.1f, moveSpeed);
         agent.acceleration = Mathf.Max(0.1f, moveAcceleration);
         agent.updateRotation = false;
+        agent.angularSpeed = 120f;
     }
 
     private void OnValidate()
